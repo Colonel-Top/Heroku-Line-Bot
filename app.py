@@ -10,12 +10,18 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
 
+from linebot.exceptions import LineBotApiError
 app = Flask(__name__)
 
 line_bot_api = LineBotApi('QWiSqwAAs1/FyPo+Rt+jKoxjjK+LbkQ1pC1zsmCO9s5g2YO9EFUsSKO90ABQpc8h31iecVkjMsG3IZ2J9xCcS5pHL0ph8nc81PIM+gJEFzkJpHIRBWiJQl7sh6dOuuApuPMC+aj1HjkT5iaHCXDJ5AdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('888960969fc0ebb0bc365fc194e97dc9')
 
 
+try:
+    line_bot_api.reply_message('<reply_token>', TextSendMessage(text='Hello World!'))
+except  LineBotApiError as e:
+    abort(400)
+    print('error')
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
