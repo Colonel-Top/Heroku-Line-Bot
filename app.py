@@ -40,6 +40,8 @@ def handle_message(event):
         event.reply_token,
         TextSendMessage(text=event.message.text))
 
-
+@app.route('/')
+def index():
+    return 'OK ya!'
 if __name__ == "__main__":
     app.run()
